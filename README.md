@@ -30,7 +30,7 @@ Each server has its own independent currency, settings, and economy system.
 
 **1. Clone the repository**
 ```bash
-git clone https://github.com/yourname/VaultBot.git
+git clone https://github.com/lion-tube/VaultBot.git
 cd VaultBot
 ```
 
