@@ -544,4 +544,104 @@ module.exports = {
       // ── Roles: add ────────────────────────────────────────────
 
       if (id === BTN.ROLE_ADD) {
-        await i.
+        await i.deferUpdate();
+        const input = await awaitTextInput(i, t(lang, "settings.roles.send_add"));
+        if (!input) return;
+
+        const roleId = input.replace(/[<@&>]/g, "");
+        const list   = [...(settings.allowed_roles || [])];
+
+        if (list.includes(roleId)) {
+          await interaction.followUp({ content: t(lang, "settings.roles.already_added"), ephemeral: true });
+          return;
+        }
+
+        list.push(roleId);
+        await db.updateGuildSetting(guildId, "allowed_roles", list);
+        await refreshSettings();
+        currentRows = buildRolesRows(lang);
+        return interaction.editReply({ embeds: [buildRolesEmbed(lang, settings)], components: currentRows });
+      }
+
+      // ── Roles: remove ─────────────────────────────────────────
+
+      if (id === BTN.ROLE_REMOVE) {
+        await i.deferUpdate();
+        const input = await awaitTextInput(i, t(lang, "settings.roles.send_remove"));
+        if (!input) return;
+
+        const roleId = input.replace(/[<@&>]/g, "");
+        const list   = [...(settings.allowed_roles || [])];
+        const idx    = list.indexOf(roleId);
+
+        if (idx === -1) {
+          await interaction.followUp({ content: t(lang, "settings.roles.not_found"), ephemeral: true });
+          return;
+        }
+
+        list.splice(idx, 1);
+        await db.updateGuildSetting(guildId, "allowed_roles", list);
+        await refreshSettings();
+        currentRows = buildRolesRows(lang);
+        return interaction.editReply({ embeds: [buildRolesEmbed(lang, settings)], components: currentRows });
+      }
+
+      // ── Roles: clear ──────────────────────────────────────────
+
+      if (id === BTN.ROLE_CLEAR) {
+        await i.deferUpdate();
+        await db.updateGuildSetting(guildId, "allowed_roles", []);
+        await refreshSettings();
+        currentRows = buildRolesRows(lang);
+        return interaction.editReply({ embeds: [buildRolesEmbed(lang, settings)], components: currentRows });
+      }
+
+      // ── Language: select menu ─────────────────────────────────
+
+      if (id === BTN.LANG_SELECT && i.isStringSelectMenu()) {
+        const selected = i.values[0];
+        if (!isValidLanguage(selected)) return i.deferUpdate();
+
+        await db.updateGuildSetting(guildId, "language", selected);
+        await refreshSettings();
+        currentRows = buildLanguageRows(lang);
+        return i.update({ embeds: [buildLanguageEmbed(lang, settings)], components: currentRows });
+      }
+
+      // ── Prefix: change ────────────────────────────────────────
+
+      const prefixKeyMap = {
+        [BTN.PFX_BALANCE]:     "balance_prefix",
+        [BTN.PFX_SALARY]:      "salary_prefix",
+        [BTN.PFX_LEADERBOARD]: "leaderboard_prefix",
+      };
+
+      if (prefixKeyMap[id]) {
+        await i.deferUpdate();
+        const input = await awaitTextInput(i, t(lang, "settings.prefix.send"));
+        if (!input) return;
+
+        if (/\s/.test(input)) {
+          await interaction.followUp({ content: t(lang, "settings.prefix.invalid"), ephemeral: true });
+          return;
+        }
+
+        await db.updateGuildSetting(guildId, prefixKeyMap[id], input.toLowerCase());
+        await refreshSettings();
+        currentRows = buildPrefixRows(lang);
+        return interaction.editReply({ embeds: [buildPrefixEmbed(lang, settings)], components: currentRows });
+      }
+    });
+
+    // ── Timeout: disable all components ──────────────────────
+
+    collector.on("end", async (_, reason) => {
+      if (reason !== "time") return;
+      logger.info(`Settings session expired → ${interaction.user.tag} in ${interaction.guild.name}`);
+      await interaction.editReply({
+        content:    t(lang, "settings.timeout"),
+        components: disableAllComponents(currentRows),
+      }).catch(() => {});
+    });
+  },
+};
