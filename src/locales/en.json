@@ -1,0 +1,147 @@
+{
+  "general": {
+    "no_permission": "❌ You don't have permission to use this command.",
+    "wrong_channel": "❌ This command is not allowed in this channel.",
+    "user_not_found": "❌ User not found.",
+    "invalid_amount": "❌ Invalid amount. Must be a positive integer.",
+    "bot_target": "❌ You cannot perform this action on a bot.",
+    "self_target": "❌ You cannot perform this action on yourself.",
+    "unknown_error": "❌ An unexpected error occurred, please try again."
+  },
+
+  "balance": {
+    "title": "💰 Balance",
+    "own": "Your current balance",
+    "other": "{user}'s balance",
+    "footer": "VaultBot • Economy"
+  },
+
+  "salary": {
+    "title": "💵 Daily Salary",
+    "received": "You received your daily salary!",
+    "amount": "Amount received",
+    "new_balance": "Your new balance",
+    "cooldown": "⏳ Your salary is not ready yet. Come back in {time}.",
+    "footer": "VaultBot • Economy"
+  },
+
+  "transfer": {
+    "title": "💸 Transfer",
+    "success": "Transfer completed successfully!",
+    "from": "From",
+    "to": "To",
+    "amount": "Amount",
+    "insufficient": "❌ Insufficient balance. Your current balance: {balance} {currency}.",
+    "footer": "VaultBot • Economy"
+  },
+
+  "leaderboard": {
+    "title": "🏆 Richest Members",
+    "empty": "No data available yet.",
+    "rank": "Rank",
+    "footer": "VaultBot • Economy"
+  },
+
+  "give": {
+    "title": "🎁 Give Currency",
+    "success": "Successfully gave {amount} {currency} to {user}!",
+    "footer": "VaultBot • Admin"
+  },
+
+  "take": {
+    "title": "🔻 Take Currency",
+    "success": "Successfully took {amount} {currency} from {user}!",
+    "no_balance": "❌ This user does not have enough balance.",
+    "footer": "VaultBot • Admin"
+  },
+
+  "settings": {
+    "title": "⚙️ VaultBot Settings",
+    "description": "Choose a section to configure using the buttons below.",
+    "timeout": "⏰ Settings session expired. Please run the command again.",
+    "saved": "✅ Saved successfully.",
+    "cancelled": "❌ Cancelled.",
+    "back": "🔙 Back",
+    "current_value": "Current value",
+    "footer": "VaultBot • Settings • Expires in 3 minutes",
+
+    "menu": {
+      "currency": "💰 Currency",
+      "salary": "💵 Salary",
+      "channels": "📢 Channels",
+      "roles": "🛡️ Roles",
+      "language": "🌐 Language",
+      "prefix": "⌨️ Prefix"
+    },
+
+    "currency": {
+      "title": "⚙️ Currency Settings",
+      "name_label": "Currency Name",
+      "name_placeholder": "Example: Gold",
+      "emoji_label": "Currency Emoji",
+      "emoji_placeholder": "Example: <:coin:123456789>",
+      "name_btn": "✏️ Change Name",
+      "emoji_btn": "🎨 Change Emoji",
+      "send_name": "Send the new currency name:",
+      "send_emoji": "Send the new currency emoji:",
+      "invalid_emoji": "❌ Invalid emoji. Make sure it's an emoji from this server."
+    },
+
+    "salary": {
+      "title": "⚙️ Salary Settings",
+      "current": "Current daily salary",
+      "btn": "✏️ Change Salary",
+      "send": "Send the new daily salary value (between 10 and 50):",
+      "invalid": "❌ Invalid number. Must be between 10 and 50."
+    },
+
+    "channels": {
+      "title": "⚙️ Channel Settings",
+      "description": "Choose a command to configure its allowed channels.",
+      "balance_btn": "💰 Balance Channels",
+      "salary_btn": "💵 Salary Channels",
+      "leaderboard_btn": "🏆 Leaderboard Channels",
+      "all_allowed": "✅ All channels allowed",
+      "current": "Current channels",
+      "add_btn": "➕ Add Channel",
+      "remove_btn": "➖ Remove Channel",
+      "clear_btn": "🗑️ Clear All",
+      "send_add": "Mention the channel you want to add:",
+      "send_remove": "Mention the channel you want to remove:",
+      "not_found": "❌ Channel not found in the list.",
+      "already_added": "❌ Channel is already in the list."
+    },
+
+    "roles": {
+      "title": "⚙️ Role Settings",
+      "description": "Roles that are allowed to use give and take commands.",
+      "current": "Current roles",
+      "no_roles": "✅ Admins only",
+      "add_btn": "➕ Add Role",
+      "remove_btn": "➖ Remove Role",
+      "clear_btn": "🗑️ Clear All",
+      "send_add": "Mention the role you want to add:",
+      "send_remove": "Mention the role you want to remove:",
+      "not_found": "❌ Role not found in the list.",
+      "already_added": "❌ Role is already in the list."
+    },
+
+    "language": {
+      "title": "⚙️ Language Settings",
+      "current": "Current language",
+      "select": "Select a language:",
+      "changed": "✅ Language changed to {lang}."
+    },
+
+    "prefix": {
+      "title": "⚙️ Prefix Settings",
+      "description": "Change the prefix for each command.",
+      "balance_btn": "💰 Balance Prefix",
+      "salary_btn": "💵 Salary Prefix",
+      "leaderboard_btn": "🏆 Leaderboard Prefix",
+      "current": "Current prefix",
+      "send": "Send the new prefix:",
+      "invalid": "❌ Invalid prefix. No spaces allowed."
+    }
+  }
+}
